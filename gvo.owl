@@ -1,0 +1,621 @@
+@prefix : <http://k-gomez.com/general-vehicle-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://k-gomez.com/general-vehicle-ontology> .
+
+<http://k-gomez.com/general-vehicle-ontology> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://k-gomez.com/general-vehicle-ontology#holdsData
+:holdsData rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdf:type owl:TransitiveProperty ;
+           rdfs:domain :Component ;
+           rdfs:range :Data .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#implementsProtocol
+:implementsProtocol rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdf:type owl:TransitiveProperty ;
+                    rdfs:domain :Component ;
+                    rdfs:range :Protocol .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#isPrimaryDeveloped
+:isPrimaryDeveloped rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    owl:inverseOf :isPrimaryDeveloping ;
+                    rdfs:domain :Protocol ;
+                    rdfs:range :Manufacturer .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#isPrimaryDeveloping
+:isPrimaryDeveloping rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Manufacturer ;
+                     rdfs:range :Protocol .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#isPrimaryManufactured
+:isPrimaryManufactured rdf:type owl:ObjectProperty ;
+                       owl:inverseOf :isPrimaryManufacturer ;
+                       rdfs:domain :Component ;
+                       rdfs:range :Manufacturer .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#isPrimaryManufacturer
+:isPrimaryManufacturer rdf:type owl:ObjectProperty ;
+                       rdfs:domain :Manufacturer ;
+                       rdfs:range :Component .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://k-gomez.com/general-vehicle-ontology#Airbag
+:Airbag rdf:type owl:Class ;
+        rdfs:subClassOf :Digital_Component ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :holdsData ;
+                          owl:someValuesFrom :Communication_Data
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :holdsData ;
+                          owl:someValuesFrom :Firmware_Data
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :holdsData ;
+                          owl:someValuesFrom :Safety_Data
+                        ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Automotive_Ethernet_Protocol
+:Automotive_Ethernet_Protocol rdf:type owl:Class ;
+                              rdfs:subClassOf :Protocol .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Battery_Related_System
+:Battery_Related_System rdf:type owl:Class ;
+                        rdfs:subClassOf :Digital_Component ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :holdsData ;
+                                          owl:someValuesFrom :Communication_Data
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :holdsData ;
+                                          owl:someValuesFrom :Firmware_Data
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :holdsData ;
+                                          owl:someValuesFrom :Safety_Data
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :holdsData ;
+                                          owl:someValuesFrom :Security_Data
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty :holdsData ;
+                                          owl:someValuesFrom :User_Data
+                                        ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Bluetooth_Interface
+:Bluetooth_Interface rdf:type owl:Class ;
+                     rdfs:subClassOf :Interface .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#CAN_Protocol
+:CAN_Protocol rdf:type owl:Class ;
+              rdfs:subClassOf :Protocol .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Chassis_Body
+:Chassis_Body rdf:type owl:Class ;
+              rdfs:subClassOf :Non_Digital_Component ;
+              owl:disjointWith :Tire .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Comfort_System
+:Comfort_System rdf:type owl:Class ;
+                rdfs:subClassOf :Digital_Component ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :holdsData ;
+                                  owl:someValuesFrom :Communication_Data
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :holdsData ;
+                                  owl:someValuesFrom :Firmware_Data
+                                ] ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :holdsData ;
+                                  owl:someValuesFrom :User_Data
+                                ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Communication_Data
+:Communication_Data rdf:type owl:Class ;
+                    rdfs:subClassOf :Data .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Component
+:Component rdf:type owl:Class .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#DOIP_Protocol
+:DOIP_Protocol rdf:type owl:Class ;
+               rdfs:subClassOf :Protocol .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Data
+:Data rdf:type owl:Class .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Data_Format
+:Data_Format rdf:type owl:Class ;
+             rdfs:subClassOf :Data .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Digital_Component
+:Digital_Component rdf:type owl:Class ;
+                   rdfs:subClassOf :Component .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#EEPROM
+:EEPROM rdf:type owl:Class ;
+        rdfs:subClassOf :Storage_Device .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Electrical_Actuator
+:Electrical_Actuator rdf:type owl:Class ;
+                     rdfs:subClassOf :Digital_Component ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :holdsData ;
+                                       owl:someValuesFrom :Firmware_Data
+                                     ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#End_Point_Device
+:End_Point_Device rdf:type owl:Class ;
+                  rdfs:subClassOf :Digital_Component ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :holdsData ;
+                                    owl:someValuesFrom :Communication_Data
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :holdsData ;
+                                    owl:someValuesFrom :Firmware_Data
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :holdsData ;
+                                    owl:someValuesFrom :Safety_Data
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :holdsData ;
+                                    owl:someValuesFrom :Security_Data
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :holdsData ;
+                                    owl:someValuesFrom :User_Data
+                                  ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Engine_Control_Unit
+:Engine_Control_Unit rdf:type owl:Class ;
+                     rdfs:subClassOf :Digital_Component ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :holdsData ;
+                                       owl:someValuesFrom :Firmware_Data
+                                     ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#External_Navigation_System
+:External_Navigation_System rdf:type owl:Class ;
+                            rdfs:subClassOf :Digital_Component ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :holdsData ;
+                                              owl:someValuesFrom :Communication_Data
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :holdsData ;
+                                              owl:someValuesFrom :Firmware_Data
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :holdsData ;
+                                              owl:someValuesFrom :Security_Data
+                                            ] ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty :holdsData ;
+                                              owl:someValuesFrom :User_Data
+                                            ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Firmware_Data
+:Firmware_Data rdf:type owl:Class ;
+               rdfs:subClassOf :Data .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Flash
+:Flash rdf:type owl:Class ;
+       rdfs:subClassOf :Storage_Device .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#GMLAN
+:GMLAN rdf:type owl:Class ;
+       rdfs:subClassOf :Protocol ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :isPrimaryDeveloped ;
+                         owl:someValuesFrom :General_Motors
+                       ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Gateway
+:Gateway rdf:type owl:Class ;
+         rdfs:subClassOf :Digital_Component ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :holdsData ;
+                           owl:someValuesFrom :Communication_Data
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :holdsData ;
+                           owl:someValuesFrom :Firmware_Data
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :holdsData ;
+                           owl:someValuesFrom :Security_Data
+                         ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#General_Motors
+:General_Motors rdf:type owl:Class ;
+                rdfs:subClassOf :Manufacturer ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :isPrimaryDeveloping ;
+                                  owl:someValuesFrom :GMLAN
+                                ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Iginition_System
+:Iginition_System rdf:type owl:Class ;
+                  rdfs:subClassOf :Digital_Component ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :holdsData ;
+                                    owl:someValuesFrom :Communication_Data
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :holdsData ;
+                                    owl:someValuesFrom :Firmware_Data
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :holdsData ;
+                                    owl:someValuesFrom :User_Data
+                                  ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Immobilizer
+:Immobilizer rdf:type owl:Class ;
+             rdfs:subClassOf :Digital_Component ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :holdsData ;
+                               owl:someValuesFrom :Communication_Data
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :holdsData ;
+                               owl:someValuesFrom :Firmware_Data
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :holdsData ;
+                               owl:someValuesFrom :Security_Data
+                             ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Infotainment
+:Infotainment rdf:type owl:Class ;
+              rdfs:subClassOf :Digital_Component ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :holdsData ;
+                                owl:someValuesFrom :Communication_Data
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :holdsData ;
+                                owl:someValuesFrom :Firmware_Data
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :holdsData ;
+                                owl:someValuesFrom :Security_Data
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :holdsData ;
+                                owl:someValuesFrom :User_Data
+                              ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Interface
+:Interface rdf:type owl:Class ;
+           rdfs:subClassOf :Component .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#JTAG_Interface
+:JTAG_Interface rdf:type owl:Class ;
+                rdfs:subClassOf :Interface .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#LIN_Protocol
+:LIN_Protocol rdf:type owl:Class ;
+              rdfs:subClassOf :Protocol .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#MOST_Protocol
+:MOST_Protocol rdf:type owl:Class ;
+               rdfs:subClassOf :Protocol .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Manufacturer
+:Manufacturer rdf:type owl:Class .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Non_Digital_Component
+:Non_Digital_Component rdf:type owl:Class ;
+                       rdfs:subClassOf :Component .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#OBD_Interface
+:OBD_Interface rdf:type owl:Class ;
+               rdfs:subClassOf :Interface .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Protocol
+:Protocol rdf:type owl:Class .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#RAM
+:RAM rdf:type owl:Class ;
+     rdfs:subClassOf :Storage_Device .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Safety_Data
+:Safety_Data rdf:type owl:Class ;
+             rdfs:subClassOf :Data .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Safety_Monitoring_System
+:Safety_Monitoring_System rdf:type owl:Class ;
+                          rdfs:subClassOf :Digital_Component ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :holdsData ;
+                                            owl:someValuesFrom :Communication_Data
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :holdsData ;
+                                            owl:someValuesFrom :Firmware_Data
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :holdsData ;
+                                            owl:someValuesFrom :Safety_Data
+                                          ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Seat_Controller
+:Seat_Controller rdf:type owl:Class ;
+                 rdfs:subClassOf :Digital_Component ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :holdsData ;
+                                   owl:someValuesFrom :Communication_Data
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :holdsData ;
+                                   owl:someValuesFrom :Firmware_Data
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :holdsData ;
+                                   owl:someValuesFrom :User_Data
+                                 ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Security_Data
+:Security_Data rdf:type owl:Class ;
+               rdfs:subClassOf :Data .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Sensor
+:Sensor rdf:type owl:Class ;
+        rdfs:subClassOf :Digital_Component .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Storage_Device
+:Storage_Device rdf:type owl:Class ;
+                rdfs:subClassOf :Digital_Component .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Telematic_Control_System
+:Telematic_Control_System rdf:type owl:Class ;
+                          rdfs:subClassOf :Digital_Component ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :holdsData ;
+                                            owl:someValuesFrom :Communication_Data
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :holdsData ;
+                                            owl:someValuesFrom :Firmware_Data
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :holdsData ;
+                                            owl:someValuesFrom :Security_Data
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :holdsData ;
+                                            owl:someValuesFrom :User_Data
+                                          ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Tesla
+:Tesla rdf:type owl:Class ;
+       rdfs:subClassOf :Manufacturer .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Tire
+:Tire rdf:type owl:Class ;
+      rdfs:subClassOf :Non_Digital_Component .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Tire_Pressure_Sensor
+:Tire_Pressure_Sensor rdf:type owl:Class ;
+                      rdfs:subClassOf :Sensor ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty :holdsData ;
+                                        owl:someValuesFrom :Firmware_Data
+                                      ] .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Toyota
+:Toyota rdf:type owl:Class ;
+        rdfs:subClassOf :Manufacturer .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#UDS_Protocol
+:UDS_Protocol rdf:type owl:Class ;
+              rdfs:subClassOf :Protocol .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#USB_Interface
+:USB_Interface rdf:type owl:Class ;
+               rdfs:subClassOf :Interface .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#User_Data
+:User_Data rdf:type owl:Class ;
+           rdfs:subClassOf :Data .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#Volkswagen
+:Volkswagen rdf:type owl:Class ;
+            rdfs:subClassOf :Manufacturer .
+
+
+###  http://k-gomez.com/general-vehicle-ontology#eCall
+:eCall rdf:type owl:Class ;
+       rdfs:subClassOf :Digital_Component ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :holdsData ;
+                         owl:someValuesFrom :Communication_Data
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :holdsData ;
+                         owl:someValuesFrom :Firmware_Data
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :holdsData ;
+                         owl:someValuesFrom :Safety_Data
+                       ] .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Airbag
+                :Battery_Related_System
+                :Comfort_System
+                :Electrical_Actuator
+                :End_Point_Device
+                :Engine_Control_Unit
+                :External_Navigation_System
+                :Gateway
+                :Iginition_System
+                :Immobilizer
+                :Infotainment
+                :Safety_Monitoring_System
+                :Seat_Controller
+                :Sensor
+                :Storage_Device
+                :Telematic_Control_System
+                :eCall
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Automotive_Ethernet_Protocol
+                :CAN_Protocol
+                :DOIP_Protocol
+                :GMLAN
+                :LIN_Protocol
+                :MOST_Protocol
+                :UDS_Protocol
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Automotive_Ethernet_Protocol
+                :CAN_Protocol
+                :DOIP_Protocol
+                :LIN_Protocol
+                :MOST_Protocol
+                :UDS_Protocol
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Bluetooth_Interface
+                :JTAG_Interface
+                :OBD_Interface
+                :USB_Interface
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Communication_Data
+                :Data_Format
+                :Firmware_Data
+                :Safety_Data
+                :Security_Data
+                :User_Data
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Component
+                :Data
+                :Manufacturer
+                :Protocol
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Digital_Component
+                :Interface
+                :Non_Digital_Component
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :EEPROM
+                :Flash
+                :RAM
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :General_Motors
+                :Tesla
+                :Toyota
+                :Volkswagen
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
